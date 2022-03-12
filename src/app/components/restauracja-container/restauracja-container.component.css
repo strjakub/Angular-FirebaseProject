@@ -1,0 +1,74 @@
+.container{
+    position: relative;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%,0%);
+    border: 1px solid black;
+    box-shadow: 0 0 50px 10px rgb(201, 201, 201);
+    border-radius: 10px;
+    width: 80vw;
+    padding: 5px;
+    background-color: rgb(255, 255, 234);
+}
+
+body{
+    padding: 20px 0;
+    width: 100%;
+    margin: 0;
+}
+
+.buttons{
+    width:100%;
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.special, button{
+    height: 100%;
+    width:12vw;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(148, 72, 219);
+    color: rgb(255, 255, 0);
+}
+
+.special{
+    background-color: purple;
+}
+
+button:hover, .special:hover{
+    background-color: rgb(61, 29, 92);
+}
+
+nav{
+    position: relative;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%,0%);
+    border: 1px solid black;
+    box-shadow: 0 0 50px 10px rgb(201, 201, 201);
+    border-radius: 10px;
+    width: 80vw;
+    margin-bottom: 2vh;
+    background-color: rgb(255, 255, 234);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@media(max-width: 1000px){
+    .special ,button{
+        height: 5vh;
+        width: 13vw;
+    }
+
+    .buttons{
+        height:auto;
+        justify-content: center;
+    }
+
+    button{
+        font-size: 0.5em;
+    }
+}

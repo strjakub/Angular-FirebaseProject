@@ -1,0 +1,25 @@
+<div class="container" *ngIf="auth.user | async as user; else showLogin">
+    <button class="logout" (click)="logout()">Logout</button>
+</div>
+<ng-template #showLogin>
+    <div class="container">
+    <form>
+        <label>Email:</label><br>
+        <input class="shortinput" name="mail" [(ngModel)] = "mail"><br>
+        <label>Password:</label><br>
+        <input name="pass" [(ngModel)] = "pass"><br>
+        <button (click)="login()">Login</button>
+        <button (click)="register()">Register</button>
+    </form>
+    </div>
+</ng-template>
+<div class="container">
+    <button class="logout" [ngClass]="{'green': !this.show}" [hidden]="this.userService.id === ''" (click)="showHist()">History</button>
+</div>
+<div class="history" *ngIf="this.userService.id !== '' && this.show">
+    <div class="histelem" *ngFor="let element of this.userService.hist">
+        <h2>{{element.name}} x{{element.amount}}</h2>
+        <h3>{{element.date}}</h3>
+        <hr>
+    </div>
+</div>

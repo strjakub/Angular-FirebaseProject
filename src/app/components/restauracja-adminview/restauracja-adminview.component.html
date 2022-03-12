@@ -1,0 +1,18 @@
+<div class="wrapper">
+    <h2>Change Persistance:</h2>
+    <button class="per" (click)="none()">NONE</button>
+    <button class="per" (click)="local()">LOCAL</button>
+    <button class="per" (click)="session()">SESSION</button>
+<div class="container">
+    <div class="center">
+        <hr>
+        <h3 class="user" *ngFor="let user of users">{{user.mail}} 
+            <button class="ban" [hidden]="user.isBanned" (click)="ban(user.id)">BAN</button> 
+            <button class="unban" [hidden]="!user.isBanned" (click)="ban(user.id)">UNBAN</button>
+            <button class="ban" [hidden]="!user.admin" (click)="adminPermission(user.id)">TAKE ADMIN</button> 
+            <button class="unban" [hidden]="user.admin" (click)="adminPermission(user.id)">GIVE ADMIN</button>
+            <button class="ban" [hidden]="!user.manager" (click)="managerPermission(user.id)">TAKE MANAGER</button> 
+            <button class="unban" [hidden]="user.manager" (click)="managerPermission(user.id)">GIVE MANAGER</button></h3>
+    </div>
+</div>
+</div>

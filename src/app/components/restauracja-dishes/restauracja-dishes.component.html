@@ -1,0 +1,12 @@
+<ng-container *ngFor="let dish of dishes; let i = index">
+    <app-restauracja-dish-item *ngIf="i >= amount*page && i < amount*(page + 1)" [dish]="dish">
+    </app-restauracja-dish-item>
+</ng-container>
+<div class="container">
+    <button class="left" (click)="previous()" [ngClass]="{turnedoff : page <= 0}"> poprzednia strona </button>
+    <button class="center" (click)="decrement()" [ngClass]="{turnedoff : amount <= 1}"> mniej </button>
+    <h4>Strona {{page+1}}</h4>
+    <button class="center" (click)="increment()" [ngClass]="{turnedoff : amount >= dishes.length}"> wiecej </button>
+    <button class="right" (click)="next()" [ngClass]="{turnedoff : amount*(page+1) >= dishes.length}"> nastepna strona </button>
+</div>
+<h1>Suma zarezerwowanych dań: <span [style.background-color]="(sumOfDishes>10) ? 'lightblue' : 'orange'">{{dishService.counter}}</span></h1>

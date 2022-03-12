@@ -1,0 +1,19 @@
+<div class="dish" [ngClass]="{'lowest': prize == getLowest() || prize / 0.88 == getLowest()}" [ngClass]="{'highest': prize == getHighest() || prize / 0.88 == getHighest()}">
+    <div class="x">
+        <h1>{{dish.name | uppercase}}</h1>
+        <h5 [hidden]="dish.limit-counter==0">Ilość pozostałych dań: <span class="span" [style.color]="(dish.limit - counter>3) ? 'darkgreen' : 'darkred'">{{dish.limit - counter}}</span></h5>
+        <h5 [hidden]="!(dish.limit-counter==0)">Danie wykupione</h5>
+        <div class="horizontal">
+            <h2 class="justmargin">{{prize}}{{mark}}</h2>
+            <button class="euro" (click)="onClick3()">Change</button>
+        </div>
+    </div>
+    <div>
+        <img (click)="jpgClick()" [hidden]="dish.foto[0] === ''" src="{{dish.foto[0]}}">
+    </div>
+    <div class="x" class="buttons" [hidden]="this.userService.id === ''">
+        <button class="addbtn" [style.display]="!(counter==dish.limit) ? 'block' : 'none'" (click)="onClick1()">+</button>
+        <div class="special">{{counter}}</div>
+        <button class="noaddbtn" [style.display]="!(counter==0) ? 'block' : 'none'" (click)="onClick2()">-</button>
+    </div>
+</div>

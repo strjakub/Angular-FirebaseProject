@@ -1,0 +1,22 @@
+<body>
+    <nav>
+        <div class="buttons">
+            <button routerLink="/main" routerLinkActive="active">Home</button>
+            <button routerLink="/dishes" routerLinkActive="active">Menu</button>
+            <button class="special" *ngIf="this.userService.id !== ''" routerLink="/cart" routerLinkActive="active">
+                Koszyk</button>
+            <button class="special" *ngIf="isManager() || isAdmin()" routerLink="/form" routerLinkActive="active">
+                Zarządzanie Menu</button>
+            <button class="special" *ngIf="isAdmin()" routerLink="/admview" routerLinkActive="active">
+                Admin View</button>
+            <button *ngIf="this.userService.id === ''" routerLink="/login" routerLinkActive="active">
+                Log in / Register</button>
+            <button *ngIf="this.userService.id !== ''" routerLink="/login" routerLinkActive="active">
+                Konto: {{this.userService.nick}}</button>
+        </div>
+    </nav>
+    <div class="container">
+        <app-header></app-header>
+        <router-outlet></router-outlet>
+    </div>
+</body>

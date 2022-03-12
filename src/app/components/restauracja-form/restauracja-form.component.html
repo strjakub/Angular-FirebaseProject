@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="wrapper">
+        <button class="dunno" [hidden]="adding" (click)="addform()">Formularz Dodawania</button>
+        <h1 class="title" [hidden]="!adding">Formularz dodawania dania</h1>
+        <h1 class="title" [hidden]="adding">Modyfikacja dania</h1>
+        <form (ngSubmit)="onSubmit()">
+            <div class="x"><label>Nazwa: </label><p class="alert" [hidden]="!(nazwa === '')">[pole wymagane]</p>
+                <input required minlength="4" [(ngModel)]="nazwa" name="nazwa" [ngModelOptions]="{standalone: true}" ></div>
+            <div class="x"><label>Ilość: </label><p class="alert" [hidden]="regex.test(ilosc.toString())">[wymagana nieujemna liczba]</p>
+                <input [(ngModel)]="ilosc" name="ilosc" [ngModelOptions]="{standalone: true}" ></div>
+            <div class="x"><label>Cena (w $): </label><p class="alert" [hidden]="regex.test(cena.toString())">[wymagana nieujemna liczba]</p>
+                <input [(ngModel)]="cena" name="cena" [ngModelOptions]="{standalone: true}" ></div>
+            <div class="x"><label>Opis: </label><p class="alert" [hidden]="!(opis === '')">[pole wymagane]</p>
+                <input [(ngModel)]="opis" name="opis" [ngModelOptions]="{standalone: true}" ></div>
+
+            <div class="special">
+                <div><p>Kuchnia: </p><p class="alert" [hidden]="!(cuisine === '')">[wymagane]</p>
+                <select [(ngModel)]="cuisine" [ngModelOptions]="{standalone: true}" class="select">
+                    <option *ngFor="let cuisine of cuisines">
+                    {{ cuisine.name }}
+                    </option>
+                </select></div>
+                <div><p>Typ: </p><p class="alert" [hidden]="!(type === '')">[wymagane]</p>
+                <select [(ngModel)]="type" [ngModelOptions]="{standalone: true}" class="select">
+                    <option *ngFor="let type of types">
+                    {{ type.name }}
+                    </option>
+                </select></div>
+                <div><p>Kategoria: </p><p class="alert" [hidden]="!(category === '')">[wymagane]</p>
+                <select [(ngModel)]="category" [ngModelOptions]="{standalone: true}" class="select">
+                    <option *ngFor="let category of categories">
+                    {{ category.name }}
+                    </option>
+                </select></div>
+            </div>
+
+            <div class="wrapper2">
+                <div class="whatIsWrongHere">   
+                    <label>Składnik: </label>
+                    <input class="select" [(ngModel)]="pom" [ngModelOptions]="{standalone: true}" type="text">
+                    <div class="center"><button class="ingredient" (click)="addIngredient()" type="button">Dodaj składnik (max 5)</button></div>
+                    <div class="x" *ngFor="let skladnik of tab; let i=index;">
+                        <div class="removediv"><p>{{skladnik}}</p><span class="remove"(click)="remove(i)">X</span></div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="center"><button class="send" type="submit" [hidden]="
+                (nazwa === '') ||
+                !regex.test(ilosc.toString()) ||
+                !regex.test(cena.toString()) ||
+                (opis === '') ||
+                (type === '') ||
+                (category === '') ||
+                (cuisine === '') ||
+                (!adding)
+                ">Send</button>
+
+                <button class="send" type="submit" [hidden]="
+                (nazwa === '') ||
+                !regex.test(ilosc.toString()) ||
+                !regex.test(cena.toString()) ||
+                (opis === '') ||
+                (type === '') ||
+                (category === '') ||
+                (cuisine === '') ||
+                (adding)
+                ">Update</button>
+            </div>
+        </form>
+
+        <ng-container *ngFor="let dish of dishes; let i = index">
+            <app-restauracja-dish-item-special [dish]="dish" (x)="modifing(dish)">
+            </app-restauracja-dish-item-special>
+        </ng-container>
+    </div>
+</div>

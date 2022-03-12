@@ -1,0 +1,18 @@
+<div class="dish">
+    <div class="x">
+        <h1>{{dish.name | uppercase}}</h1>
+        <h5 [hidden]="dish.limit-counter==0">Ilość pozostałych dań: <span class="span" [style.color]="(dish.limit - counter>3) ? 'darkgreen' : 'darkred'">{{dish.limit - counter}}</span></h5>
+        <h5 [hidden]="!(dish.limit-counter==0)">Danie wykupione</h5>
+        <div class="horizontal">
+            <h2 class="justmargin">{{prize}}{{mark}}</h2>
+            <button class="euro" (click)="onClick3()">Change</button>
+        </div>
+    </div>
+    <div>
+        <img [hidden]="dish.foto[0] === ''" src="{{dish.foto[0]}}">
+    </div>
+    <div class="x" class="y">
+        <button class="remove" (click)="onDelete(dish, counter)">Delete</button><br>
+        <button class="remove" (click)="modify()">Modify</button>
+    </div>
+</div>

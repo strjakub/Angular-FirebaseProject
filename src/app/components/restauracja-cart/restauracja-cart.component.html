@@ -1,0 +1,12 @@
+<div class="container">
+    <h1>Koszyk:</h1>
+    <h2 [hidden]="!dollar">Wartość całkowita: {{this.cartService.sum}}$</h2>
+    <h2 [hidden]="dollar">Wartość całkowita: {{this.cartService.sum * 0.88}}€</h2>
+    <h2></h2>
+    <button class="change" (click)="change()">Change</button>
+    <div class="position" [hidden] = "cartposition.number == 0" *ngFor="let cartposition of cart">
+        <span class="x">{{cartposition.id | uppercase}}</span> 
+        <span class="y">x{{cartposition.number}}</span>
+    </div>
+    <button class="change" (click)="buy()">Buy</button>
+</div>

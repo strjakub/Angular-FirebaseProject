@@ -1,0 +1,51 @@
+h1{
+    font-size: 40px;
+    margin: 30px;
+}
+
+span{
+    border-radius: 5px;
+}
+
+.container{
+    margin: 2vw;
+    padding: 0.5vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left{
+    height: 30px;
+    border-radius: 10px;
+    color: azure;
+    background-color: rgb(95, 0, 19);
+}
+
+.right{
+    height: 30px;
+    border-radius: 10px;
+    color: azure;
+    background-color: rgb(95, 0, 19);
+}
+
+.center{
+    height: 30px;
+    border-radius: 10px;
+    color: azure;
+    background-color: rgb(95, 0, 19);
+}
+
+.left:hover, .right:hover, .center:hover{
+    transform: scale(1.05);
+}
+
+.turnedoff{
+    background-color: black;
+    color: black;
+    border:none;
+}
+
+.turnedoff:hover{
+    transform: none;
+}
+

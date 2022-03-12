@@ -1,0 +1,80 @@
+<button class="euro" (click)="goBack()">Go Back</button>
+<div class="dish">
+    <div class="x">
+        <h3>{{dish.name | uppercase}}</h3>
+        <p>{{dish.description}}</p>
+        <h5 [hidden]="dish.limit-counter==0">Ilość pozostałych dań: <span class="span" [style.color]="(dish.limit - counter>3) ? 'darkgreen' : 'darkred'">{{dish.limit - counter}}</span></h5>
+        <h5 [hidden]="!(dish.limit-counter==0)">Danie wykupione</h5>
+        <div class="horizontal">
+            <h2 class="justmargin">{{prize}}{{mark}}</h2>
+            <button class="euro" (click)="onClick3()">Change</button>
+        </div>
+    </div>
+    <div>
+        <img [hidden]="dish.foto[fotoCounter % dish.foto.length] === ''" src="{{dish.foto[fotoCounter % dish.foto.length]}}">
+        <div class="flex">
+            <button class="euro" (click)="left()">wiecej w lewo</button>
+            <button class="euro" (click)="right()">wiecej w prawo</button>
+        </div>
+    </div>
+    <div class="x">
+        <h5>Info:</h5>
+        <p class="cuisine">Kuchnia: {{dish.cuisine | uppercase}}</p>
+        <p>Typ: {{dish.type}}</p>
+        <p>Kateogria: {{dish.category}}</p>
+    </div>
+    <div class="x">
+        <h5>Składniki:</h5>
+       
+        <p [hidden]="x === ''" *ngFor="let x of dish.ingredients">-> {{x}}</p>
+       
+    </div>
+    <div class="x a">
+        <h6 [hidden]="dish.no_ratings != 0">Brak ocen</h6>
+        <h6 [hidden]="dish.no_ratings == 0">Średnia ocen: {{(dish.rating / dish.no_ratings).toFixed(2)}}</h6>
+        <h6 [hidden]="isIn(this.userService.id, dish.can_rate) || isManager()">Kup by oceniać</h6>
+        <h6 [hidden]="!isIn(this.userService.id, dish.rated) || isManager()">Już oceniłeś</h6>
+        <h6 [hidden]="!isManager()">Manager nie może oceniać</h6>
+        <div [hidden]="rating != 0 || isIn(this.userService.id, dish.rated) || !isIn(this.userService.id, dish.can_rate) || isManager()">
+            <button (click)="function1()" class="star-button star-button1"><i class="star"></i></button>
+            <button (click)="function2()" class="star-button star-button2"><i class="star"></i></button>
+            <button (click)="function3()" class="star-button star-button3"><i class="star"></i></button>
+            <button (click)="function4()" class="star-button star-button4"><i class="star"></i></button>
+            <button (click)="function5()" class="star-button star-button5"><i class="star"></i></button>
+        </div>
+        <div [hidden]="rating != 5"><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></div>
+        <div [hidden]="rating != 4"><i class="star"></i><i class="star"></i><i class="star"></i><i class="star"></i></div>
+        <div [hidden]="rating != 3"><i class="star"></i><i class="star"></i><i class="star"></i></div>
+        <div [hidden]="rating != 2"><i class="star"></i><i class="star"></i></div>
+        <div [hidden]="rating != 1"><i class="star"></i></div>
+        <br>
+        <a [hidden]="dish.link === ''" href="{{dish.link}}">Więcej zdjęć -></a>
+        <h6 [hidden]="!(dish.link === '')">Brak linku to zdjęć</h6>
+    </div>
+    <div class="x" class="buttons">
+        <button class="addbtn" [style.display]="!(counter==dish.limit) ? 'block' : 'none'" (click)="onClick1()">+</button>
+        <div class="special">{{counter}}</div>
+        <button class="noaddbtn" [style.display]="!(counter==0) ? 'block' : 'none'" (click)="onClick2()">-</button>
+    </div>
+</div>
+<div class="comments">
+    <h1>Comments</h1> <hr>
+    <h3 [hidden]="isIn(this.userService.id, dish.can_rate) || isManager()">Możliwość komentowania włączy się po zakupie</h3>
+    <form (ngSubmit)="addComment()" [hidden]="!isIn(this.userService.id, dish.can_rate) && !isManager()">
+        <label>Nick: </label> <br> <input [(ngModel)]="nick" name="nick"> <br>
+        <label>Title: </label> <br> <input [(ngModel)]="title" name="title"> <br>
+        <label>Date (optional) [format: DD-MM-YYYY]: </label> <br> <input [(ngModel)]="date" name="date"> <br>
+        <label>Comment (min: 50znaków; max: 500 znaków): </label> <br> <textarea [(ngModel)]="comment" name="comment" class="big"></textarea> <br>
+        <h3 class="error" [hidden]="errors.length <= 1" *ngFor="let error of errors">{{error}}</h3>
+        <button class="euro">Add Comment</button>
+    </form>
+    <ng-container *ngFor="let comment of comments">
+        <div *ngIf="comment.id == dish.id">
+            <h2>Title: {{comment.title}}</h2>
+            <h3>Nick: {{comment.nick}}</h3>
+            <h4 [hidden]="comment.date === ''">{{comment.date}}</h4>
+            <p>{{comment.description}}</p>
+            <hr>
+        </div>
+    </ng-container>
+</div>
