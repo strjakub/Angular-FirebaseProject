@@ -2,7 +2,7 @@
 
 Website with firebase authentication for restaurants customers who want to easier buy their favorite food, rate and buy dishes; significant part of the data is integrated with Firebase database.
 
-Technologies: Angular, TypeScript, HTML, CSS, Firebase Realtime Database, Firebase Authentication
+Technologies: Angular, TypeScript, HTML, CSS, Firebase Database, Firebase Authentication
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.1.
 
